@@ -264,6 +264,109 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    Author:
+      x-skaffolder-id: 5ee3d859a360c675ce53e6ee
+      x-skaffolder-id-db: 5ee3c509a360c675ce53e621
+      x-skaffolder-id-entity: 5ee3d859a360c675ce53e6e9
+      x-skaffolder-url: /author
+      properties:
+        _id:
+          type: string
+          x-skaffolder-required: true
+        books:
+          type: string
+          x-skaffolder-id-attr: 5ee3d859a360c675ce53e6ed
+          x-skaffolder-type: String
+        dateOfBirth:
+          type: integer
+          x-skaffolder-id-attr: 5ee3d859a360c675ce53e6eb
+          x-skaffolder-type: Date
+        dateOfDeath:
+          type: integer
+          x-skaffolder-id-attr: 5ee3d859a360c675ce53e6ec
+          x-skaffolder-type: Date
+        name:
+          type: string
+          x-skaffolder-id-attr: 5ee3d859a360c675ce53e6ea
+          x-skaffolder-type: String
+      x-skaffolder-relations: 
+      required:
+        - _id
+    Book:
+      x-skaffolder-id: 5ee3d632a360c675ce53e6cf
+      x-skaffolder-id-db: 5ee3c509a360c675ce53e621
+      x-skaffolder-id-entity: 5ee3d632a360c675ce53e6ca
+      x-skaffolder-url: /book
+      properties:
+        _id:
+          type: string
+          x-skaffolder-required: true
+        ISBN:
+          type: string
+          x-skaffolder-id-attr: 5ee3d632a360c675ce53e6cd
+          x-skaffolder-type: String
+          x-skaffolder-required: true
+          x-skaffolder-unique: true
+        author:
+          type: string
+          x-skaffolder-id-attr: 5ee3d632a360c675ce53e6cc
+          x-skaffolder-type: String
+        category:
+          type: string
+          x-skaffolder-id-attr: 5ee3d632a360c675ce53e6ce
+          x-skaffolder-type: String
+        genre:
+          type: string
+          x-skaffolder-id-attr: 5ee3d795a360c675ce53e6df
+          x-skaffolder-type: String
+        language:
+          type: string
+          x-skaffolder-id-attr: 5ee3d795a360c675ce53e6e0
+          x-skaffolder-type: String
+        sumary:
+          type: string
+          x-skaffolder-id-attr: 5ee3d795a360c675ce53e6e1
+          x-skaffolder-type: String
+        title:
+          type: string
+          x-skaffolder-id-attr: 5ee3d632a360c675ce53e6cb
+          x-skaffolder-type: String
+      x-skaffolder-relations: 
+      required:
+        - _id
+        - ISBN
+    Cart:
+      x-skaffolder-id: 5ee3d6d3a360c675ce53e6dd
+      x-skaffolder-id-db: 5ee3c509a360c675ce53e621
+      x-skaffolder-id-entity: 5ee3d6d3a360c675ce53e6db
+      x-skaffolder-url: /cart
+      properties:
+        _id:
+          type: string
+          x-skaffolder-required: true
+        Books:
+          type: string
+          x-skaffolder-id-attr: 5ee3d6d3a360c675ce53e6dc
+          x-skaffolder-type: String
+      x-skaffolder-relations: 
+      required:
+        - _id
+    Genre:
+      x-skaffolder-id: 5ee3d7e2a360c675ce53e6e6
+      x-skaffolder-id-db: 5ee3c509a360c675ce53e621
+      x-skaffolder-id-entity: 5ee3d7e2a360c675ce53e6e4
+      x-skaffolder-url: /genre
+      properties:
+        _id:
+          type: string
+          x-skaffolder-required: true
+        name:
+          type: string
+          x-skaffolder-id-attr: 5ee3d7e2a360c675ce53e6e5
+          x-skaffolder-type: String
+      x-skaffolder-relations: 
+      required:
+        - _id
     User:
       x-skaffolder-id: 5ee3c50aa360c675ce53e62a
       x-skaffolder-id-db: 5ee3c509a360c675ce53e621

@@ -27,6 +27,10 @@ import SecurityController from "../controllers/SecurityController";
 import Database_Bookstore_db from "./Database_Bookstore_db.js";
 
 // Controllers
+import AuthorController from "../controllers/Bookstore_db/AuthorController";
+import BookController from "../controllers/Bookstore_db/BookController";
+import CartController from "../controllers/Bookstore_db/CartController";
+import GenreController from "../controllers/Bookstore_db/GenreController";
 import UserController from "../controllers/Bookstore_db/UserController";
 
 // End Import Controllers
@@ -108,6 +112,10 @@ class Server {
     SecurityController.init(router);
 
     // Start Init Controllers
+		AuthorController.init(router);
+		BookController.init(router);
+		CartController.init(router);
+		GenreController.init(router);
 		UserController.init(router);
 		 // End Init Controllers
 

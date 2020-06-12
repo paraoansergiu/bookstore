@@ -7,6 +7,10 @@ import properties from "../properties.js";
 
 // Start Import Models
 
+import AuthorModel from "../models/Bookstore_db/AuthorModel";
+import BookModel from "../models/Bookstore_db/BookModel";
+import CartModel from "../models/Bookstore_db/CartModel";
+import GenreModel from "../models/Bookstore_db/GenreModel";
 import UserModel from "../models/Bookstore_db/UserModel";
 
 // End Import Models
@@ -23,6 +27,10 @@ class Database {
 
     // Start Init Models
 
+		AuthorModel.init();
+		BookModel.init();
+		CartModel.init();
+		GenreModel.init();
 		UserModel.init();
  // End Init Models
   }
