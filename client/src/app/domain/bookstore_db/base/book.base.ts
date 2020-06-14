@@ -33,4 +33,5 @@ export class BookBase {
     public language?: string;
     public sumary?: string;
     public title?: string;
-}
+    // Relations m:m authors
+    public authors: string[]}

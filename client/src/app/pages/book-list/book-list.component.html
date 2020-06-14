@@ -1,0 +1,123 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>Book List</h1>
+</div>
+
+<!-- SEARCH FORM -->
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-search"></i> Search
+    </div>
+    <div class="card-body">
+        <form #searchForm="ngForm">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="ISBN">ISBN</label>
+                        <input type="text" class="form-control" id="ISBN" [(ngModel)]="search.ISBN" name="ISBN" #ISBN="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" class="form-control" id="author" [(ngModel)]="search.author" name="author" #author="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" class="form-control" id="category" [(ngModel)]="search.category" name="category" #category="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <input type="text" class="form-control" id="genre" [(ngModel)]="search.genre" name="genre" #genre="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                        <input type="text" class="form-control" id="language" [(ngModel)]="search.language" name="language" #language="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="sumary">Sumary</label>
+                        <input type="text" class="form-control" id="sumary" [(ngModel)]="search.sumary" name="sumary" #sumary="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" [(ngModel)]="search.title" name="title" #title="ngModel">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- TABLE -->
+<table class="table mt-40">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">author</th>
+            <th scope="col">category</th>
+            <th scope="col">genre</th>
+            <th scope="col">language</th>
+            <th scope="col">sumary</th>
+            <th scope="col">title</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of list | search: { 'ISBN': search.ISBN, 'author': search.author, 'category': search.category, 'genre': search.genre, 'language': search.language, 'sumary': search.sumary, 'title': search.title }">
+            <!-- ATTRIBUTES -->
+            <td>
+                <a [routerLink]="['/books/', item._id]">{{item._id}}</a>
+            </td>
+            <td>{{item.ISBN }}</td>
+            <td>{{item.author }}</td>
+            <td>{{item.category }}</td>
+            <td>{{item.genre }}</td>
+            <td>{{item.language }}</td>
+            <td>{{item.sumary }}</td>
+            <td>{{item.title }}</td>
+
+            <!-- DELETE BUTTON -->
+            <td>
+                <button class="btn btn-danger text-center" data-toggle="modal" data-target="#deleteModal" (click)="selectId(item._id)">
+                    <span>
+                        <i class="fa fa-trash"></i>
+                    </span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <div class="no-result" *ngIf="(list | search: {   'ISBN': search.ISBN ,  'author': search.author ,  'category': search.category ,  'genre': search.genre ,  'language': search.language ,  'sumary': search.sumary ,  'title': search.title  }).length == 0">
+        No items found
+    </div>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want remove item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteItem()">YES</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BUTTON -->
+<button class="btn btn-primary text-center pull-right mb-20" routerLink="/books/new">
+    <span>
+        <i class="fa fa-plus"></i>
+    </span>
+</button>
+
+<div class="clearfix"></div>

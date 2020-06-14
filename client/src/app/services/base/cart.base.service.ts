@@ -53,6 +53,64 @@ export class CartBaseService {
 
     // CRUD METHODS
 
+    /**
+    * CartService.create
+    *   @description CRUD ACTION create
+    *
+    */
+    create(item: Cart): Observable<Cart> {
+        return this.http
+            .post<Cart>(this.contextUrl, item)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * CartService.delete
+    *   @description CRUD ACTION delete
+    *   @param ObjectId id Id
+    *
+    */
+    remove(id: string): Observable<void> {
+        return this.http
+            .delete<void>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * CartService.get
+    *   @description CRUD ACTION get
+    *   @param ObjectId id Id resource
+    *
+    */
+    get(id: string): Observable<Cart> {
+        return this.http
+            .get<Cart>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * CartService.list
+    *   @description CRUD ACTION list
+    *
+    */
+    list(): Observable<Cart[]> {
+        return this.http
+            .get<Cart[]>(this.contextUrl)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * CartService.update
+    *   @description CRUD ACTION update
+    *   @param ObjectId id Id
+    *
+    */
+    update(item: Cart): Observable<Cart> {
+        return this.http
+            .post<Cart>(this.contextUrl + '/' + item._id, item)
+            .pipe(map(data => data));
+    }
+
 
     // Custom APIs
 

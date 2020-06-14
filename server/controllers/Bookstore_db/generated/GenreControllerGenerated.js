@@ -27,12 +27,96 @@ const generatedControllers = {
    */
   init: router => {
     const baseUrl = `${Properties.api}/genre`;
+    router.post(baseUrl + "", authorize([]), GenreController.create);
+    router.delete(baseUrl + "/:id", authorize([]), GenreController.delete);
+    router.get(baseUrl + "/:id", authorize([]), GenreController.get);
+    router.get(baseUrl + "", authorize([]), GenreController.list);
+    router.post(baseUrl + "/:id", authorize([]), GenreController.update);
   },
 
 
   // CRUD METHODS
 
 
+  /**
+  * GenreModel.create
+  *   @description CRUD ACTION create
+  *
+  */
+  create: async (req, res) => {
+    try {
+      const result = await GenreModel.create(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * GenreModel.delete
+  *   @description CRUD ACTION delete
+  *   @param ObjectId id Id
+  *
+  */
+  delete: async (req, res) => {
+    try {
+      const result = await GenreModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * GenreModel.get
+  *   @description CRUD ACTION get
+  *   @param ObjectId id Id resource
+  *
+  */
+  get: async (req, res) => {
+    try {
+      const result = await GenreModel.get(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * GenreModel.list
+  *   @description CRUD ACTION list
+  *
+  */
+  list: async (req, res) => {
+    try {
+      const result = await GenreModel.list();
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  
+  /**
+  * GenreModel.update
+  *   @description CRUD ACTION update
+  *   @param ObjectId id Id
+  *
+  */
+  update: async (req, res) => {
+    try {
+      const result = await GenreModel.update(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
   
   // Custom APIs
 

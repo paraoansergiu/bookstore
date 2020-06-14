@@ -27,12 +27,113 @@ const generatedControllers = {
    */
   init: router => {
     const baseUrl = `${Properties.api}/book`;
+    router.post(baseUrl + "", authorize([]), BookController.create);
+    router.delete(baseUrl + "/:id", authorize([]), BookController.delete);
+    router.get(baseUrl + "/findByauthors/:key", authorize([]), BookController.findByauthors);
+    router.get(baseUrl + "/:id", authorize([]), BookController.get);
+    router.get(baseUrl + "", authorize([]), BookController.list);
+    router.post(baseUrl + "/:id", authorize([]), BookController.update);
   },
 
 
   // CRUD METHODS
 
 
+  /**
+  * BookModel.create
+  *   @description CRUD ACTION create
+  *
+  */
+  create: async (req, res) => {
+    try {
+      const result = await BookModel.create(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * BookModel.delete
+  *   @description CRUD ACTION delete
+  *   @param ObjectId id Id
+  *
+  */
+  delete: async (req, res) => {
+    try {
+      const result = await BookModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * BookModel.findByauthors
+  *   @description CRUD ACTION findByauthors
+  *   @param Objectid key Id of model to search for
+  *
+  */
+  findByauthors: async (req, res) => {
+    try {
+      const result = await BookModel.findByauthors(req.params.key);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * BookModel.get
+  *   @description CRUD ACTION get
+  *   @param ObjectId id Id resource
+  *
+  */
+  get: async (req, res) => {
+    try {
+      const result = await BookModel.get(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * BookModel.list
+  *   @description CRUD ACTION list
+  *
+  */
+  list: async (req, res) => {
+    try {
+      const result = await BookModel.list();
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  
+  /**
+  * BookModel.update
+  *   @description CRUD ACTION update
+  *   @param ObjectId id Id
+  *
+  */
+  update: async (req, res) => {
+    try {
+      const result = await BookModel.update(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
   
   // Custom APIs
 

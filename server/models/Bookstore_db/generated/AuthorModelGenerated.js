@@ -50,6 +50,10 @@ const generatedModel = {
       
       // EXTERNAL RELATIONS
       /*
+      authors: [{
+        type: Schema.ObjectId,
+        ref: "Book"
+      }],
       */
     });
 
@@ -78,6 +82,55 @@ const generatedModel = {
   // CRUD METHODS
 
 
+  /**
+  * AuthorModel.create
+  *   @description CRUD ACTION create
+  *
+  */
+  async create(item) {
+    const obj = new generatedModel.model(item);
+    return await obj.save();
+  },
+  
+  /**
+  * AuthorModel.delete
+  *   @description CRUD ACTION delete
+  *   @param ObjectId id Id
+  *
+  */
+  async delete(id) {
+    return await generatedModel.model.findByIdAndRemove(id);
+  },
+  
+  /**
+  * AuthorModel.get
+  *   @description CRUD ACTION get
+  *   @param ObjectId id Id resource
+  *
+  */
+  async get(id) {
+    return await generatedModel.model.findOne({ _id : id });
+  },
+  
+  /**
+  * AuthorModel.list
+  *   @description CRUD ACTION list
+  *
+  */
+  async list() {
+    return await generatedModel.model.find();
+  },
+  
+  /**
+  * AuthorModel.update
+  *   @description CRUD ACTION update
+  *   @param ObjectId id Id
+  *
+  */
+  async update(item) { 
+    return await generatedModel.model.findOneAndUpdate({ _id: item._id }, item, {'new': true});
+  },
+  
 
 
 };

@@ -27,12 +27,96 @@ const generatedControllers = {
    */
   init: router => {
     const baseUrl = `${Properties.api}/author`;
+    router.post(baseUrl + "", authorize([]), AuthorController.create);
+    router.delete(baseUrl + "/:id", authorize([]), AuthorController.delete);
+    router.get(baseUrl + "/:id", authorize([]), AuthorController.get);
+    router.get(baseUrl + "", authorize([]), AuthorController.list);
+    router.post(baseUrl + "/:id", authorize([]), AuthorController.update);
   },
 
 
   // CRUD METHODS
 
 
+  /**
+  * AuthorModel.create
+  *   @description CRUD ACTION create
+  *
+  */
+  create: async (req, res) => {
+    try {
+      const result = await AuthorModel.create(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * AuthorModel.delete
+  *   @description CRUD ACTION delete
+  *   @param ObjectId id Id
+  *
+  */
+  delete: async (req, res) => {
+    try {
+      const result = await AuthorModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * AuthorModel.get
+  *   @description CRUD ACTION get
+  *   @param ObjectId id Id resource
+  *
+  */
+  get: async (req, res) => {
+    try {
+      const result = await AuthorModel.get(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * AuthorModel.list
+  *   @description CRUD ACTION list
+  *
+  */
+  list: async (req, res) => {
+    try {
+      const result = await AuthorModel.list();
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  
+  /**
+  * AuthorModel.update
+  *   @description CRUD ACTION update
+  *   @param ObjectId id Id
+  *
+  */
+  update: async (req, res) => {
+    try {
+      const result = await AuthorModel.update(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
   
   // Custom APIs
 

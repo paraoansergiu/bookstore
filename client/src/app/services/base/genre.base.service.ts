@@ -53,6 +53,64 @@ export class GenreBaseService {
 
     // CRUD METHODS
 
+    /**
+    * GenreService.create
+    *   @description CRUD ACTION create
+    *
+    */
+    create(item: Genre): Observable<Genre> {
+        return this.http
+            .post<Genre>(this.contextUrl, item)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * GenreService.delete
+    *   @description CRUD ACTION delete
+    *   @param ObjectId id Id
+    *
+    */
+    remove(id: string): Observable<void> {
+        return this.http
+            .delete<void>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * GenreService.get
+    *   @description CRUD ACTION get
+    *   @param ObjectId id Id resource
+    *
+    */
+    get(id: string): Observable<Genre> {
+        return this.http
+            .get<Genre>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * GenreService.list
+    *   @description CRUD ACTION list
+    *
+    */
+    list(): Observable<Genre[]> {
+        return this.http
+            .get<Genre[]>(this.contextUrl)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * GenreService.update
+    *   @description CRUD ACTION update
+    *   @param ObjectId id Id
+    *
+    */
+    update(item: Genre): Observable<Genre> {
+        return this.http
+            .post<Genre>(this.contextUrl + '/' + item._id, item)
+            .pipe(map(data => data));
+    }
+
 
     // Custom APIs
 

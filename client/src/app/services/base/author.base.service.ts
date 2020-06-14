@@ -49,6 +49,10 @@ import { Author } from '../../domain/bookstore_db/author';
 		},
 		//RELATIONS
 		//EXTERNAL RELATIONS
+		authors: [{
+			type: Schema.ObjectId,
+			ref : "Book"
+		}],
 	}
  *
  */
@@ -61,6 +65,64 @@ export class AuthorBaseService {
         ) { }
 
     // CRUD METHODS
+
+    /**
+    * AuthorService.create
+    *   @description CRUD ACTION create
+    *
+    */
+    create(item: Author): Observable<Author> {
+        return this.http
+            .post<Author>(this.contextUrl, item)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * AuthorService.delete
+    *   @description CRUD ACTION delete
+    *   @param ObjectId id Id
+    *
+    */
+    remove(id: string): Observable<void> {
+        return this.http
+            .delete<void>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * AuthorService.get
+    *   @description CRUD ACTION get
+    *   @param ObjectId id Id resource
+    *
+    */
+    get(id: string): Observable<Author> {
+        return this.http
+            .get<Author>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * AuthorService.list
+    *   @description CRUD ACTION list
+    *
+    */
+    list(): Observable<Author[]> {
+        return this.http
+            .get<Author[]>(this.contextUrl)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * AuthorService.update
+    *   @description CRUD ACTION update
+    *   @param ObjectId id Id
+    *
+    */
+    update(item: Author): Observable<Author> {
+        return this.http
+            .post<Author>(this.contextUrl + '/' + item._id, item)
+            .pipe(map(data => data));
+    }
 
 
     // Custom APIs
